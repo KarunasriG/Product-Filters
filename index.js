@@ -238,7 +238,7 @@ app.get('/products/sort/popularity', (req, res) => {
   sortedProducts.sort(function (prod1, prod2) {
     return prod2.rating - prod1.rating;
   });
-  res.json(sortedProducts);
+  res.json({ products: sortedProducts });
 });
 
 // Get the products sorted by “high-to-low” price
@@ -247,7 +247,7 @@ app.get('/products/sort/price-high-to-low', (req, res) => {
   sortedProducts.sort(function (prod1, prod2) {
     return prod2.price - prod1.price;
   });
-  res.json(sortedProducts);
+  res.json({ products: sortedProducts });
 });
 
 // Get the products sorted by “low-to-high” price
@@ -256,7 +256,7 @@ app.get('/products/sort/price-low-to-high', (req, res) => {
   sortedProducts.sort(function (prod1, prod2) {
     return prod1.price - prod2.price;
   });
-  res.json(sortedProducts);
+  res.json({ products: sortedProducts });
 });
 
 // Filter the products based on the “RAM” option
@@ -268,7 +268,7 @@ app.get('/products/filter/ram', (req, res) => {
   let filteredProducts = products.filter((product) =>
     filterByRam(product, ram)
   );
-  res.json(filteredProducts);
+  res.json({ products: filteredProducts });
 });
 
 // Filter the products based on the “ROM” option
@@ -280,7 +280,7 @@ app.get('/products/filter/rom', (req, res) => {
   let filteredProducts = products.filter((product) =>
     filterByRom(product, rom)
   );
-  res.json(filteredProducts);
+  res.json({ products: filteredProducts });
 });
 
 // Filter the products based on the “Brand” option
@@ -292,7 +292,7 @@ app.get('/products/filter/brand', (req, res) => {
   let filteredProducts = products.filter((product) =>
     filterByBrand(product, brand)
   );
-  res.json(filteredProducts);
+  res.json({ products: filteredProducts });
 });
 
 // Filter the products based on the “OS” option
@@ -302,7 +302,7 @@ function filterByOs(product, os) {
 app.get('/products/filter/os', (req, res) => {
   let os = req.query.os.toLowerCase();
   let filteredProducts = products.filter((product) => filterByOs(product, os));
-  res.json(filteredProducts);
+  res.json({ products: filteredProducts });
 });
 
 // Filter the products based on the “Price” option
@@ -314,12 +314,12 @@ app.get('/products/filter/price', (req, res) => {
   let filteredProducts = products.filter((product) =>
     filterByPrice(product, price)
   );
-  res.json(filteredProducts);
+  res.json({ products: filteredProducts });
 });
 
 // Send original array of products
 app.get('/products', (req, res) => {
-  res.json(products);
+  res.json({ products: products });
 });
 
 app.listen(port, () => {
